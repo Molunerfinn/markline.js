@@ -1,0 +1,22 @@
+canvas{
+  background: #000;
+}
+
+#mk-info{
+  position: absolute;          
+  background: rgba(0,0,0,0.5);
+  border: 1px solid #000;
+  padding: 4px 8px;
+  top: 0px;
+  left: 0px;
+  color: #fff;
+  max-width: 250px;
+  word-wrap: break-word;
+  z-index: 1000;
+  font-size: 20px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+#mk-info div{
+  line-height: 20px;
+}

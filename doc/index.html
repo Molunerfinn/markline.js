@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>marklinejs</title>
+  <style type="text/css">
+    body{
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100%;
+      overflow: hidden;
+    }
+    canvas{
+      background-color: black;
+    }
+
+    #mk-info{
+      font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+      position: absolute;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid #000;
+      padding: 4px 8px;
+      top: 200px;
+      left: 200px;
+      color: #fff;
+      max-width: 250px;
+      word-wrap: break-word;
+      font-size: 20px;
+    }
+    #mk-info div{
+      line-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <img id="markLine-bg" src="BG.jpg" style="display: none">
+  <header id="header" class="">
+    
+  </header><!-- /header -->
+  <canvas id="canvas" width="1366" height="600"></canvas>
+</body>
+<script type="text/javascript" src="../markline.min.js"></script>
+<script type="text/javascript">
+  var cvs = document.getElementById("canvas");
+  cvs.width = window.innerWidth;
+  cvs.height= window.innerHeight;
+
+  var mkLine = markLine("canvas","markLine-bg",1920,1080);
+  var option = [
+  {
+    from: {x: 791,y: 114},
+    to: {x:1041, y:364},
+    info: ['This is markline~']
+  },
+    {
+      from: {x: 791,y: 114},
+      to: {x:1041, y:364},
+      style: '#fff',
+      info: ['This is markline~']
+    },
+    {
+      from: {x: 1041,y: 364,name:""},
+      to: {x:791, y:114,name:""},
+      info: ['This is markline~']
+    },
+    {
+      from: {x: 1041,y: 114},
+      to: {x:791, y:364},
+      style: '#fff',
+      info: ['This is markline~']
+    },
+    {
+      from: {x: 791,y: 364},
+      to: {x:1041, y:114},
+      style: '#fff',
+      info: ['This is markline~']
+    },
+  ]
+  mkLine.setOption(option);
+  mkLine.paint();
+
+  var data= [{
+    x: 791,
+    y: 114,
+    style: "#fff",
+    info: ['This is markPoint~']
+  },{
+    x: 1041,
+    y: 114,
+    style: "#fff",
+    info: ['This is markPoint~']
+  },{
+    x: 1041,
+    y: 364,
+    style: "#fff",
+    info: ['This is markPoint~']
+  },{
+    x: 791,
+    y: 364,
+    style: "#fff",
+    info: ['This is markPoint~']
+  }];
+
+  mkLine.paintPoint(data);
+
+</script>
+
+</html>
