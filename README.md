@@ -359,7 +359,7 @@ mkLine.onContextmenu(function(){
 
 **Tips**:通常和`.getHover()`事件进行配合使用
 
-### 修改右键菜单样式
+### 修改鼠标hover的提示样式
 
 只需要更改markline.css里的`#mk-info`和`#mk-info div`的样式即可。
 
