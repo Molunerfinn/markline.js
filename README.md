@@ -11,7 +11,7 @@ A simple & light js for painting marklines.
 
 - 支持缩放、拖动
 - 支持背景图放置类型有img和canvas
-- 无依赖、轻量（min版仅9kb）
+- 无依赖、轻量（min版仅10kb）
 
 ## 示例
 
@@ -362,6 +362,30 @@ mkLine.onContextmenu(function(){
 ### 修改鼠标hover的提示样式
 
 只需要更改markline.css里的`#mk-info`和`#mk-info div`的样式即可。
+
+## 更新日志
+
+### v0.2
+
+增加：
+
+- markline与point光影效果
+
+修复：
+
+- 缩放的时候闪屏的bug
+- 第一条markline颜色偏暗的bug
+- point的形状渲染成非圆的bug
+
+### v0.1
+
+介绍：
+
+- 无依赖、轻量级canvas库
+- 支持导入图片或者canvas作为背景
+- 支持鼠标滚轮缩放、支持PC端鼠标拖拽
+- 数据驱动——给出所需数据到画图只需两步
+- 支持自定义显示hover信息
 
 ## License
 
