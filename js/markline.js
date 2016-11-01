@@ -48,9 +48,9 @@
   cvsBall.width = 100;
   cvsBall.height = 100;
   ctxBall.beginPath();
-  ctxBall.arc(50, 50, 50, 0, Math.PI * 2);
+  ctxBall.arc(50, 50, 15, 0, Math.PI * 2);
   ctxBall.fillStyle = 'rgba(255,255,255,1)';
-  ctxBall.fill();
+  ctxBall.fill()
 
   // 创建默认背景
   var cvsBg = document.createElement('canvas'),
@@ -176,11 +176,19 @@
     },
     paint: function(){
       var ctx = this.ctx;
+      ctx.save();
       ctx.beginPath();
+      ctx.globalAlpha = 1;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowBlur = 15;
+      ctx.shadowColor="rgba(255,255,255,0.3)";
       this.draw(1);
       ctx.strokeStyle = this.style;
       ctx.stroke();
       drawArrow(ctx,this.x2,this.y2,this.angle,20,10,this.style);
+      ctx.closePath();
+      ctx.restore();
     },
     onHover: function(e){
       info.innerHTML = "";
@@ -229,6 +237,7 @@
     hoverPaint: function(){
       var ctx = this.ctx;
       ctx.beginPath();
+      ctx.globalAlpha = 0.3;
       this.draw(6);
       ctx.strokeStyle = this.style;
       ctx.stroke();
@@ -267,10 +276,13 @@
       // percent 可以理解为小球运动速度
       var percent = percent / 100;
       var ctx = this.ctx;
+      var radius = 15;
+      ctx.save();
       this.x = this.pointAt(percent).x,
       this.y = this.pointAt(percent).y;
-      ctxGlobal.globalAlpha = 0.6;
-      ctxGlobal.drawImage(cvsBall, this.x - 2, this.y - 2, 4, 4);
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(cvsBall, this.x - radius / 2, this.y - radius / 2, radius, radius);
+      ctx.restore();
     },
     change: function(x1,y1,path,len){
       this.x = x1;
@@ -287,7 +299,7 @@
     this.x = option.x;
     this.y = option.y;
     this.info = option.info || "";
-    this.style = option.style || 'red';
+    this.style = option.style || '#fff';
     this.ctx = ctxGlobal;
     option.id == 0 ? this.id = 0 : this.id = option.id || pointCount;
     points[pointCount] = this;
@@ -297,10 +309,21 @@
   Point.prototype = {
     paint: function(r){
       var ctx = this.ctx;
+      ctx.globalAlpha = 1;
+      ctx.save();
       ctx.beginPath();
-      ctx.fillStyle = this.style;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowBlur = 25;
+      ctx.shadowColor="rgba(255,255,255,0.3)";
       this.draw(r);
+      ctx.fillStyle = this.style;
+      ctx.strokeStyle = this.style;
+      ctx.lineWidth = 0.5;
       ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
     },
     onHover: function(e){
       info.innerHTML = "";
@@ -322,7 +345,6 @@
     draw: function(r){
       var ctx = this.ctx;
       ctx.arc(this.x,this.y,r,0,Math.PI * 2);
-      ctx.closePath();
     },
     isMouseInPoint: function(mouse){
       this.ctx.beginPath();
@@ -436,18 +458,21 @@
 
   // 画背景  
   function paintBg(){
+    ctxGlobal.save();
+    ctxGlobal.ctxGlobalAlpha = 1;
     if(imgId != ""){
       var img = document.getElementById(imgId);
       ctxGlobal.drawImage(img,imgPosition.x,imgPosition.y,canWidth,canHeight);      
     }else{
       ctxGlobal.drawImage(cvsBg,imgPosition.x,imgPosition.y,canWidth,canHeight);      
     }
+    ctxGlobal.restore();
   }
 
   // 绘制关键点
   function paintPoint(option){
     for(var i = 0; i < option; i++){
-      points[i].paint(3);
+      points[i].paint(2.5);
     }
   }
 
@@ -467,14 +492,8 @@
     clickFlag == true ?  ctxGlobal.globalAlpha = 1 : ctxGlobal.globalAlpha = 0.2; //小球轨迹
     percent >= 100 ? percent = 0 : percent = (percent + 0.3); // 小球速度控制 
 
-    // 绘制背景
     paintBg();
-    if(hoverFlag.hover != false && hoverFlag.type == "point"){
-      points[hoverFlag.id].hoverPaint();
-      paintPoint(pointOption);
-    }else{
-      paintPoint(pointOption);
-    }
+    // 绘制背景
 
     // 绘制线、球
     if(clickFlag != true){
@@ -491,6 +510,12 @@
       }
     }
 
+    if(hoverFlag.hover != false && hoverFlag.type == "point"){
+      points[hoverFlag.id].hoverPaint();
+      paintPoint(pointOption);
+    }else{
+      paintPoint(pointOption);
+    }
       window.requestAnimationFrame(animation);
   }
 
@@ -614,7 +639,7 @@
               lines[i].paint();
           } 
           for(var i = 0; i < points.length; i++){
-              points[i].paint(3);
+              points[i].paint(2.5);
           } 
         }
 
