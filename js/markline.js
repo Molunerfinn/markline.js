@@ -181,7 +181,7 @@
       ctx.globalAlpha = 1;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 10;
       ctx.shadowColor="rgba(255,255,255,0.3)";
       this.draw(1);
       ctx.strokeStyle = this.style;
@@ -314,7 +314,7 @@
       ctx.beginPath();
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
-      ctx.shadowBlur = 25;
+      ctx.shadowBlur = 15;
       ctx.shadowColor="rgba(255,255,255,0.3)";
       this.draw(r);
       ctx.fillStyle = this.style;
