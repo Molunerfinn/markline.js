@@ -391,6 +391,6 @@ mkLine.onContextmenu(function(){
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016 Molunerfinn
+Copyright (c) 2016-2017 Molunerfinn
 
 
